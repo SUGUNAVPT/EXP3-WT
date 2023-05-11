@@ -1,0 +1,682 @@
+form validation
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="style1.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-10/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="heard">
+            <h2>Create Account</h2>
+        </div>
+        <form class="form" id="form">
+            <div class="form-control">
+                <label>Username</label>
+                <input type="text" placeholder="Eg:Harsha"
+                       id="username">
+                <small>Error Message</small>
+            </div>
+            <div class="form-control">
+                <label>Email</label>
+                <input type="email" placeholder="abc@gmail.com" id="email">
+                <small>Error Message</small>
+            </div>
+            <div class="form-control">
+                <label>Password</label>
+                <input type="password" placeholder="password" id="password"
+                       id="password">
+                <small>Error Message</small>
+            </div>
+            <div class="form-control">
+                <label>Confirm password</label>
+                <input type="password" placeholder="confirm password"
+                       id="password2">
+                <small>Error Message</small>
+            </div>
+            <button>submit</button>
+        </form>
+    </div>
+    <script>
+        const form = document.getElementById("form");
+        const username = document.getElementById("username");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const password2 = document.getElementById("password2");
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            checkInput();
+        });
+
+        function checkInput() {
+            const usernameValue = username.value.trim();
+            const emailValue = email.value.trim();
+            const passwordValue = password.value.trim();
+            const password2Value = password2.value.trim();
+
+            if (usernameValue === '') {
+                setError(username, 'Username Cannot Be Blank');
+            }
+            else {
+                setSuccess(username);
+            }
+
+
+            if (emailValue === '') {
+                setError(email, 'Email Cannot Be Blank');
+            }
+            else if (!isEmail(emailValue)) {
+                setError(email, 'Not a Valid Email');
+            }
+            else {
+                setSuccess(email);
+            }
+
+            if (passwordValue === '') {
+                setError(password, 'Password Cannot Be Blank');
+            }
+            else {
+                setSuccess(password);
+            }
+
+
+            if (password2Value === '') {
+                setError(password2, 'password Cannot Be blank');
+            }
+            else if (passwordValue !== password2Value)
+                setError(password2, 'password Does Not Match')
+            else {
+                setSuccess(password2);
+            }
+        }
+
+        function setError(input, message) {
+            const formControl = input.parentElement;
+            const small = formControl.querySelector('small');
+            formControl.className = 'form-control error';
+            small.innerText = message;
+
+        }
+        function setSuccess(input) {
+            const formControl = input.parentElement;
+            formControl.className = 'form-control success';
+        }
+
+        function isEmail(email) {
+            return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+
+        }
+    </script>
+</body>
+</html>
+
+validation - java 
+
+function validation() {
+    if (document.FormFill.Username.value == "") {
+        document.getElementById("result").innerHTML = "Enter Username*";
+        return false;
+    }
+    else if (document.FormFill.Username.value.length < 6) {
+        document.getElementById("result").innerHTML = "Atleast six letters*";
+        return false;
+    }
+    else if (document.FormFill.Email.value == "") {
+        document.getElementById("result").innerHTML = "Enter your Email*";
+        return false;
+    }
+    else if (document.FormFill.Password.value == "") {
+        document.getElementById("result").innerHTML = "Enter your Password*";
+        return false;
+    }
+    else if (document.FormFill.Password.value.length < 6) {
+        document.getElementById("result").innerHTML = "Password must be 6-digits*";
+        return false;
+    }
+    else if (document.FormFill.CPassword.value == "") {
+        document.getElementById("result").innerHTML = "enter Confirm Password*";
+        return false;
+    }
+    else if (document.FormFill.CPassword.value !== document.FormFill.Password.value) {
+        document.getElementById("result").innerHTML = "Password does'nt matched*";
+        return false;
+    }
+    else if (document.FormFill.Password.value == document.FormFill.CPassword.value) {
+        popup.classList.add("open-slide")
+        return false;
+    }
+
+}
+
+var popup = document.getElementById('popup');
+function CloseSlide() {
+    popup.classList.remove("open-slide")
+}
+
+validation - css
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightskyblue;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 10px 20px 25px rgba(0,0,0,.3);
+    overflow: hidden;
+    max-width: 100%;
+    width: 400px;
+}
+
+.header {
+    border-bottom: 1px solid #f0f0f0;
+    background-color: #f7f7f7;
+    padding: 20px 40px;
+}
+
+    .header h2 {
+        margin: 0;
+        text-align: center;
+    }
+
+.form {
+    padding: 30px 40px;
+}
+
+.form-control {
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+    .form-control label {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    .form-control input {
+        border: 2px solid #f0f0f0;
+        border-radius: 4px;
+        display: block;
+        padding: 10px;
+        width: 100%;
+    }
+
+        .form-control input:focus {
+            outline: none;
+            border-color: #777;
+        }
+
+    .form-control.success input {
+        border-color: #2ecc71;
+    }
+
+    .form-control.error input {
+        border-color: red;
+    }
+
+    .form-control i {
+        visibility: hidden;
+        position: absolute;
+        top: 40px;
+        right: 10px;
+    }
+
+    .form-control small {
+        color: red;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        visibility: hidden;
+    }
+
+    .form-control.error small {
+        visibility: visible;
+    }
+
+.form button {
+    background-color: #3700B3;
+    border: none;
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    width: 100px;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+
+login - html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-box">
+            <form action="" name="FormFill" onsubmit="return validation()">
+                <h2>Login In</h2>
+                <p id="result"></p>
+
+
+                <div class="input-box">
+                    <i class='bx bxs-envelope'></i>
+                    <input type="email" name="Email" placeholder="Email">
+                </div>
+
+                <div class="input-box">
+                    <i class='bx bxs-lock-alt'></i>
+                    <input type="password" name="Password" placeholder="Password">
+                </div>
+
+
+
+                <div class="button">
+                    <input type="submit" class=".btn" onclick="validation()" value="Login">
+                </div>
+
+
+            </form>
+        </div>
+
+
+
+
+</body>
+</html>
+
+login - css
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "poppins",sans-serif;
+}
+
+body {
+    background: url(background.webp) no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.form-box {
+    position: relative;
+    width: 400px;
+    height: 550px;
+    border: 2px solid rgba(255,255,2550.5);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .form-box h2 {
+        color: #fff;
+        text-align: center;
+        font-size: 32px;
+    }
+
+    .form-box .input-box {
+        position: relative;
+        margin: 30px 0;
+        width: 310px;
+        border-bottom: 2px solid #fff;
+    }
+
+        .form-box .input-box input {
+            width: 100%;
+            height: 45px;
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 0 20px 0 5px;
+            color: #fff;
+            font-size: 16px;
+        }
+
+i {
+    position: absolute;
+    color: #fff;
+    top: 13px;
+    right: 0;
+}
+
+input::placeholder {
+    color: #fff;
+}
+
+.btn {
+    color: #fff;
+    background: blue;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 3px 0 10px rgba(0,0,0,.5);
+}
+
+.group {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .group span a {
+        color: #fff;
+        position: relative;
+        top: 10px;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .group a:focus {
+        text-decoration: underline;
+    }
+
+#result {
+    color: red;
+    font-weight: 600;
+    position: relative;
+    top: 25px;
+}
+
+.popup {
+    width: 400px;
+    background-color: #fff;
+    border-radius: 6px;
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    transition: transform .4s, top .4s;
+    visibility: hidden;
+    text-align: center;
+    padding: 0 30px 30px;
+    height: 330px;
+    color: #000;
+}
+
+    .popup ion-icon {
+        color: #00ff00;
+        font-size: 50px;
+    }
+
+    .popup button {
+        width: 100%;
+        background: #00ff00;
+        padding: 10px 0;
+        margin-top: 50px;
+        border: none;
+        outline: none;
+        font-size: 18px;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 0 0 2px rgba(0,0,0,.1);
+    }
+
+    .popup a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        letter-spacing: 2px;
+    }
+
+.open-slide {
+    top: 50%;
+    transform: translate(-50%,-50%) scale(1);
+    visibility: visible;
+}
+
+.popup h2 {
+    font-weight: 500;
+    font-size: 38px;
+    margin: 30px 0 10px;
+}
+
+
+personal details page - html
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="per.css" />
+    <title></title>
+</head>
+<body>
+
+
+    <form>
+        <fieldset>
+            <legend>PERSONAL DETAILS</legend>
+
+            <p><label>customer name : <input type="text" /></label></p>
+            <p><label>customer id : <input type="text" /></label></p>
+            <p><label>password : <input type="password" /></label></p>
+            <p><label>customer no : <input type="number" /></label></p>
+
+
+
+            <h3>Select your gender</h3>
+            <label>Male<input type="radio" name="gender" value="male" /></label>
+            <label>Female<input type="radio" name="gender" value="female" /></label>
+
+            <h3>Choose items</h3>
+            <ul style="list-style-type:none;">
+                <li><input type="checkbox" name="items" value="oreo" />oreo</li>
+                <li><input type="checkbox" name="items" value="chocolates" />chocolates</li>
+                <li><input type="checkbox" name="items" value="onion" />onion</li>
+                <li><input type="checkbox" name="items" value="potato" />potato</li>
+                <li><input type="checkbox" name="items" value="shampo" />shampo</li>
+                <li><input type="checkbox" name="items" value="notebooks" />notebooks</li>
+            </ul>
+
+            <p>
+                <button type="submit">Submit</button>
+            </p>
+
+            <p>
+                <button type="reset">Cancel</button>
+            </p>
+
+
+        </fieldset>
+    </form>
+</body>
+</html>
+
+personal details page - css
+
+
+body {
+    background-image: url('https://st4.depositphotos.com/13611012/23809/i/450/depositphotos_238099330-stock-photo-seamless-pattern-various-grocery-products.jpg'); background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    backdrop-filter: blur(5px);
+}
+
+about us - html
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="StyleSheet1.css">
+    <title></title>
+</head>
+<body>
+
+
+    <div class="centered">
+        <h1>About Us</h1><br>
+        <p style="font-size: 20pt;font-family: 'Times New Roman'">GROCO is an online shooping website for people .</p><br>
+        <p style="font-size: 20pt;font-family: 'Times New Roman'">we are helping you to do your purchace your products from your place !!!</p>
+    </div>
+
+    <h3>OUR BRANCHES</h3>
+    <ul type="square">
+        <li>Erode</li>
+        <li>Gobi</li>
+        <li>Coimbatore</li>
+        <li>Chennai</li>
+    </ul>
+    
+</body>
+</html>
+aboutus - css
+
+
+body {
+    background-image: url('https://thumbs.dreamstime.com/b/flat-lay-composition-overturned-paper-bag-groceries-black-wooden-background-space-text-flat-lay-composition-157615767.jpg');
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+    background-size:cover;
+    backdrop-filter:blur(5px);
+}
+
+
+grocessory list page - html
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="gro.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>SHOW TIMING</title>
+</head>
+
+                          
+<body>
+    <div class="container">
+        
+        <header class="bg-primary p-4 text-white text-center"><strong>GROCESSORY LIST</strong></header>
+   
+
+
+        <div class="row">
+            <div class="col-md-8 col-xs-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thread>
+                            <tr>
+                                <th>items</th>
+                                <th>price</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thread>
+                        <tbody>
+                            <tr class="active">
+                                <td>Dairy Milk</td>
+                                <td>100</td>
+                                <td>10</td>
+                            </tr>
+                            <tr class="active">
+                                <td>Milky Bar</td>
+                                <td>20</td>
+                                <td>11</td>
+                            </tr>
+                            <tr class="active">
+                                <td>Good day</td>
+                                <td>40</td>
+                                <td>20</td>
+                            </tr>
+                            <tr class="active">
+                                <td>Magiee</td>
+                                <td>20</td>
+                                <td>50</td>
+                            </tr>
+                            <tr class="active">
+                                <td>Tropicana</td>
+                                <td>99</td>
+                                <td>19</td>
+                            </tr>
+                            <tr class="active">
+                                <td>Hide and Seek</td>
+                                <td>30</td>
+                                <td>30</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                   
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</body>
+
+
+                
+
+
+
+
+
+</html>
+
+
+grocery list page - css
+
+
+.bottom {
+    position: bottom;
+    top: 50%;
+    left: 50%
+}
+
+table {
+    text-align: center;
+    font-size: medium;
+    align-items: center;
+}
+
+body {
+    background-image: url('https://cdn1.vectorstock.com/i/1000x1000/65/50/supermarket-food-items-seamless-background-vector-1876550.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    backdrop-filter: blur(5px);
+}
